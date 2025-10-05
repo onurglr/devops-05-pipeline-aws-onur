@@ -18,7 +18,7 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: devops-05-pipeline-aws-onur
-        image: mimaraslan/devops-05-pipeline-aws-onur:latest
+        image: onurguler18/devops-05-pipeline-aws-onur:latest
         imagePullPolicy: "Always"
         resources:
           limits:
