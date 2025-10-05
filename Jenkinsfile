@@ -90,7 +90,7 @@ pipeline {
             }
         }
 
-/*
+
         stage('Deploy to Kubernetes'){
             steps{
                 script{
@@ -113,12 +113,11 @@ pipeline {
                 sh 'docker image prune -f'
             }
         }
-        */
-
+     
     }
 
 
-/*
+
     post {
      always {
         emailext attachLog: true,
@@ -130,6 +129,6 @@ pipeline {
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
-*/
+
 
 }
