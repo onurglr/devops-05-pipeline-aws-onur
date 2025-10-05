@@ -14,13 +14,11 @@ pipeline {
 
     stages {
 
-
          stage('Cleanup Workspace') {
             steps {
                 cleanWs()
             }
         }
-
 
         stage('Checkout from SCM') {
             steps {
@@ -30,16 +28,25 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                  sh 'npm install'
+                 script {
+                    if (isUnix()) {
+                            sh 'npm install'
+                        } else  {
+                            bat 'npm install'
+                     }
+                 }
             }
         }
 
-        /*
+       /*
         stage("Sonarqube Analysis") {
             steps {
                 withSonarQubeEnv('SonarTokenForJenkins') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=devops-05-pipeline-aws \
-                    -Dsonar.projectKey=devops-05-pipeline-aws'''
+                    sh '''
+                        $SCANNER_HOME/bin/sonar-scanner \
+                        -Dsonar.projectName=devops-05-pipeline-aws \
+                        -Dsonar.projectKey=devops-05-pipeline-aws
+                    '''
                 }
             }
         }
@@ -67,6 +74,7 @@ pipeline {
         }
 
 
+/*
         stage('TRIVY FS SCAN') {
              steps {
                  sh "trivy fs . > trivyfs.txt"
@@ -116,6 +124,7 @@ pipeline {
                 sh 'docker image prune -f'
             }
         }
+        */
 
     }
 
