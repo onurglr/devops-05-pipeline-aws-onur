@@ -90,7 +90,7 @@ pipeline {
             }
         }
 
-/*
+
         stage('Deploy to Kubernetes'){
             steps{
                 script{
@@ -113,8 +113,7 @@ pipeline {
                 sh 'docker image prune -f'
             }
         }
-        */
-
+     
     }
 
 
