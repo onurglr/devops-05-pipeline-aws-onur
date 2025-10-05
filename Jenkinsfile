@@ -38,10 +38,10 @@ pipeline {
             }
         }
 
-       /*
+    
         stage("Sonarqube Analysis") {
             steps {
-                withSonarQubeEnv('SonarTokenForJenkins') {
+                withSonarQubeEnv('SonarTokenForOnurJenkins') {
                     sh '''
                         $SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectName=devops-05-pipeline-aws-onur \
@@ -50,31 +50,20 @@ pipeline {
                 }
             }
         }
-       */
+   
 
-        stage('Run SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarTokenForJenkins') {
-                    sh '''
-                        ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=devops-05-pipeline-aws \
-                        -Dsonar.sources=src
-                    '''
-                }
-            }
-        }
-
+/*
 
        stage("Quality Gate"){
            steps {
                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'SonarTokenForJenkins'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'SonarTokenForOnurJenkins'
                 }
             }
         }
 
+*/
 
-/*
         stage('TRIVY FS SCAN') {
              steps {
                  sh "trivy fs . > trivyfs.txt"
@@ -94,7 +83,7 @@ pipeline {
             }
         }
 
-
+/*
         stage("TRIVY Image Scan"){
             steps{
                 sh "trivy image onurguler18/devops-05-pipeline-aws:latest > trivyimage.txt"
