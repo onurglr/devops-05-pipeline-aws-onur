@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: devops-05-pipeline-aws
+  name: devops-05-pipeline-aws-onur
   labels:
-    app: devops-05-pipeline-aws
+    app: devops-05-pipeline-aws-onur
     team: frontend  
 spec:
   type: LoadBalancer
@@ -11,5 +11,5 @@ spec:
     - port: 80
       targetPort: 3000
   selector:
-    app: devops-05-pipeline-aws
+    app: devops-05-pipeline-aws-onur
 

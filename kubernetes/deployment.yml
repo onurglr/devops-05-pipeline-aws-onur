@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-05-pipeline-aws
+  name: devops-05-pipeline-aws-onur
   labels:
-    app: devops-05-pipeline-aws
+    app: devops-05-pipeline-aws-onur
     team: frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: devops-05-pipeline-aws
+      app: devops-05-pipeline-aws-onur
   template:
     metadata:
       labels:
-        app: devops-05-pipeline-aws
+        app: devops-05-pipeline-aws-onur
     spec:
       terminationGracePeriodSeconds: 30
       containers:
-      - name: devops-05-pipeline-aws
-        image: mimaraslan/devops-05-pipeline-aws:latest
+      - name: devops-05-pipeline-aws-onur
+        image: mimaraslan/devops-05-pipeline-aws-onur:latest
         imagePullPolicy: "Always"
         resources:
           limits:
