@@ -22,7 +22,7 @@ pipeline {
 
         stage('Checkout from SCM') {
             steps {
-                git branch: 'master',  url: 'https://github.com/mimaraslan/devops-05-pipeline-aws.git'
+                git branch: 'master',  url: 'https://github.com/onurglr/devops-05-pipeline-aws-onur.git'
             }
         }
 
@@ -44,8 +44,8 @@ pipeline {
                 withSonarQubeEnv('SonarTokenForJenkins') {
                     sh '''
                         $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.projectName=devops-05-pipeline-aws \
-                        -Dsonar.projectKey=devops-05-pipeline-aws
+                        -Dsonar.projectName=devops-05-pipeline-aws-onur \
+                        -Dsonar.projectKey=devops-05-pipeline-aws-onur
                     '''
                 }
             }
@@ -87,8 +87,8 @@ pipeline {
                  script{
                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){
                       sh "docker build -t devops-05-pipeline-aws ."
-                      sh "docker tag devops-05-pipeline-aws mimaraslan/devops-05-pipeline-aws:latest "
-                      sh "docker push mimaraslan/devops-05-pipeline-aws:latest "
+                      sh "docker tag devops-05-pipeline-aws onurguler18/devops-05-pipeline-aws:latest "
+                      sh "docker push onurguler18/devops-05-pipeline-aws:latest "
                     }
                 }
             }
@@ -97,7 +97,7 @@ pipeline {
 
         stage("TRIVY Image Scan"){
             steps{
-                sh "trivy image mimaraslan/devops-05-pipeline-aws:latest > trivyimage.txt"
+                sh "trivy image onurguler18/devops-05-pipeline-aws:latest > trivyimage.txt"
             }
         }
 
@@ -120,7 +120,7 @@ pipeline {
 
         stage('Docker Image to Clean') {
             steps {
-                // sh 'docker rmi mimaraslan/devops-05-pipeline-aws:latest'
+                // sh 'docker rmi onurguler18/devops-05-pipeline-aws:latest'
                 sh 'docker image prune -f'
             }
         }
@@ -137,7 +137,7 @@ pipeline {
             body: "Project: ${env.JOB_NAME}<br/>" +
                 "Build Number: ${env.BUILD_NUMBER}<br/>" +
                 "URL: ${env.BUILD_URL}<br/>",
-            to: 'mimaraslan@gmail.com',
+            to: 'onur18guler@gmail.com',
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
